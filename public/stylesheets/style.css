@@ -53,3 +53,7 @@ select, #datepicker {
 .error {
   color: darkred;
 }
+#rates-container {
+    margin: 0 auto;
+    width: 600px;
+}

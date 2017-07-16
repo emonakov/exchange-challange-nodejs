@@ -14,6 +14,7 @@ block content
         div(id="container")
         h3(class="error" v-if="error" v-bind:error="error") {{error}}
       div(id="rates-container" v-if="latest")
+        canvas(id="myChart" width="400" height="400")
         ul
           li(v-for="(rate, currency) in latest.rates" v-bind="latest")
             strong {{currency}} &nbsp;

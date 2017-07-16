@@ -22,7 +22,6 @@ router.get('/historical', function(req, res, next) {
     .then(function (data) {
       res.json(data);
     }, function (err) {
-      console.log(err);
       next(Connector.createError(err));
     });
 });

@@ -24,14 +24,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
-// app.use(function(err, req, res, next) {
-//   if (err.json) {
-//     res.status(err.status || 500);
-//     res.json({'error': err.message});
-//   } else {
-//     next(err);
-//   }
-// });
+app.use(function(err, req, res, next) {
+  if (err.json) {
+    res.status(err.status || 500);
+    res.json({'error': err.message});
+  } else {
+    next(err);
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

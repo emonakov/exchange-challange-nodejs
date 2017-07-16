@@ -7,7 +7,9 @@ var application = function () {
         historical: null,
         base: null,
         history: null,
-        error: null
+        error: null,
+        chart: null,
+        chartCurrency: ['AUD', 'CAD', 'CHF', 'CZK', 'GBP', 'EUR', 'HKD', 'USD', 'RUB']
       },
       created: function () {
         this.fetchLatest();
@@ -28,10 +30,50 @@ var application = function () {
         renderResponse: function (data) {
           this.latest = data.body;
           this.error = null;
+          this.renderChart(data);
         },
         errorHandler: function (error) {
           this.error = error.body.error;
           this.latest = null;
+        },
+        renderChart: function (data) {
+          var rates = data.body.rates;
+          var values = [];
+          var currency = [];
+          for (var index in this.chartCurrency) {
+            if (this.chartCurrency[index] == data.body.base) {
+              continue;
+            }
+            currency.push(this.chartCurrency[index]);
+            values.push(rates[this.chartCurrency[index]]);
+          }
+          this.destroyChart();
+          var interval = setInterval(function () {
+            if (document.getElementById("myChart")) {
+              this.createChart(currency, values);
+              clearInterval(interval);
+            }
+          }.bind(this), 500);
+        },
+        createChart: function (currency, values) {
+          var ctx = document.getElementById("myChart").getContext('2d');
+          this.chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: currency,
+                datasets: [{
+                    label: 'currency rate',
+                    data: values,
+                    borderWidth: 1
+                }]
+            }
+          });
+        },
+        destroyChart: function () {
+          if (this.chart) {
+            this.chart.destroy();
+            // document.getElementById('chart').innerHTML = '';
+          }
         },
         fetchHistorical: function () {
           this.history = document.querySelector('#datepicker').value;
@@ -54,7 +96,7 @@ window.addEventListener("load", function () {
     field: document.getElementById('datepicker'),
     container: document.getElementById('container'),
     firstDay: 1,
-    minDate: new Date(1990, 12, 31),
+    minDate: new Date(1999, 12, 31),
     maxDate: new Date(),
     yearRange: [1990, 2020],
     format: 'YYYY-MM-DD',
