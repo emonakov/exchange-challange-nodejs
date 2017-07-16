@@ -1,0 +1,55 @@
+body {
+    margin:      50px 0 0 0;
+    padding:     0;
+    width:       100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align:  center;
+    color:       #aaa;
+    font-size:   18px;
+}
+h1 {
+    color:          #719e40;
+    letter-spacing: -3px;
+    font-family:    'Lato', sans-serif;
+    font-size:      100px;
+    font-weight:    200;
+    margin-bottom:  0;
+}
+li {
+    list-style: none;
+}
+form {
+    padding-top: 20px;
+}
+select, #datepicker {
+    width:          80px;
+    border:         1px solid #c0c0c0;
+    height:         35px;
+    vertical-align: middle;
+    padding-left:   10px;
+    color:          #aaa;
+    font-size:      18px;
+    margin-left: 10px;
+}
+#datepicker {
+    width: 140px;
+    height: 35px;
+    margin: 20px;
+    text-align: center;
+    padding-left: 0;
+    border: none;
+    outline: none;
+}
+#container {
+    width: 50%;
+    margin: 0 auto;
+}
+.pika-single.is-hidden, .pika-single.is-bound {
+    display: inline-block;
+    position: relative;
+    border: none;
+    box-shadow: none;
+}
+.error {
+  color: darkred;
+}

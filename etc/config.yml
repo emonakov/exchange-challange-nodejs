@@ -1,0 +1,7 @@
+port: 3001
+exchange:
+  api_url: 'http://api.fixer.io/'
+  api_key: ''
+  endpoints:
+    latest: 'latest'
+    historical: ''

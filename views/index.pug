@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+    div(class="currency-container" id="app")
+      div(class="left")
+        h3 Currency Selector:
+          select(id="currency-select" v-on:change="fetchLatest")
+            each item in currency
+              option= item
+      div(class="right")
+        input(id="datepicker" v-on:change="fetchHistorical")
+        div(id="container")
+        h3(class="error" v-if="error" v-bind:error="error") {{error}}
+      div(id="rates-container" v-if="latest")
+        ul
+          li(v-for="(rate, currency) in latest.rates" v-bind="latest")
+            strong {{currency}} &nbsp;
+            | {{rate}}
