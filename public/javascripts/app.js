@@ -72,7 +72,6 @@ var application = function () {
         destroyChart: function () {
           if (this.chart) {
             this.chart.destroy();
-            // document.getElementById('chart').innerHTML = '';
           }
         },
         fetchHistorical: function () {
