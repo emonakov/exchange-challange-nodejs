@@ -1,3 +1,6 @@
+/**
+ * This class is just a contract
+ */
 class Interface {
   getLatest(params) {
   }

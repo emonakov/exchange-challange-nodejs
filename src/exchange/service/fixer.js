@@ -4,8 +4,17 @@ const request = require('request');
 const NodeCache = require('node-cache');
 const cache = new NodeCache();
 
-
+/**
+ * Actual implementation of the api
+ * service
+ */
 class Fixer extends Interface {
+  /**
+   * gets the configuration and saves
+   * parameters
+   *
+   * @param config
+   */
   constructor(config) {
     super();
     this.apiUrl = config.exchange.api_url;
@@ -13,6 +22,14 @@ class Fixer extends Interface {
     this.historicalEndpoint = config.exchange.endpoints.historical;
   }
 
+  /**
+   * Gets parameters from the connector,
+   * parses them and request data from the service api
+   * Caches responses with node_cache module
+   *
+   * @param params
+   * @returns {Promise}
+   */
   getLatest(params) {
     if (!params) {
       params = [];
@@ -37,6 +54,15 @@ class Fixer extends Interface {
     });
   }
 
+  /**
+   * Gets parameters from the connector,
+   * gets historical date and them and requests
+   * data from the service api
+   * Caches responses with node_cache module
+   *
+   * @param params
+   * @returns {Promise}
+   */
   getHistorical(params) {
     if (!params.history) {
       return false;
@@ -63,6 +89,15 @@ class Fixer extends Interface {
     });
   }
 
+  /**
+   * Just gets the list of available currencies
+   * from the latest result of service api
+   * data from the service api
+   * Caches responses with node_cache module
+   *
+   * @param params
+   * @returns {Promise}
+   */
   getAvailableCurrency() {
     let dataPromise = this.getLatest();
     return new Promise(function (resolve, reject) {

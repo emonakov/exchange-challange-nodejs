@@ -3,6 +3,7 @@ const router = express.Router();
 const Connector = require('../src/exchange/connector');
 const config = require('../etc/index');
 
+// main entry point. Renders the main page with a currency selector
 router.get('/', function(req, res, next) {
   let connector = new Connector(config);
   connector
@@ -14,6 +15,9 @@ router.get('/', function(req, res, next) {
     });
 });
 
+// historical endpoint. Sends out json response
+// to the browser with either correct response from the
+// api or error
 router.get('/historical', function(req, res, next) {
   let connector = new Connector(config);
   let params = req.query;
@@ -26,6 +30,9 @@ router.get('/historical', function(req, res, next) {
     });
 });
 
+// latest endpoint. Sends out json response
+// to the browser with either correct response from the
+// api or error
 router.get('/latest', function(req, res, next) {
   let connector = new Connector(config);
   let params = req.query;
